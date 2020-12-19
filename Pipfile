@@ -1,0 +1,18 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+python-dotenv = "*"
+tweepy = "*"
+
+[dev-packages]
+pytest = "*"
+pytest-cov = "*"
+pylint = "*"
+black = "*"
+bpython = "*"
+
+[requires]
+python_version = "3.8"
