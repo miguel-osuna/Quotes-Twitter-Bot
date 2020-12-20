@@ -2,8 +2,6 @@ import os
 import tweepy
 import logging
 
-from config import *
-
 logger = logging.getLogger(__name__)
 
 

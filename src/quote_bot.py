@@ -4,7 +4,6 @@ import tweepy
 import logging
 import requests
 
-from config import *
 from api import create_api
 
 logging.basicConfig(level=logging.INFO)
