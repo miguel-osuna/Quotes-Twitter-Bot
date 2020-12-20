@@ -6,7 +6,6 @@ name = "pypi"
 [packages]
 python-dotenv = "*"
 tweepy = "*"
-zappa = "*"
 
 [dev-packages]
 pytest = "*"

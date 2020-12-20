@@ -21,7 +21,7 @@ def get_random_quote(quotes_api_url, quotes_api_key):
 
 def format_random_quote(quote):
     """ Format a random quote for display. """
-    content = quote["quote_text"]
+    content = '"{}"'.format(quote["quote_text"])
     author = quote["author_name"].strip(",")
     tags = " ".join(["#" + tag for tag in quote["tags"]])
     random_quote = "{}\n\u2014 {}\n{}".format(content, author, tags)
@@ -29,13 +29,23 @@ def format_random_quote(quote):
 
 
 def tweet_quote_of_the_day(api, quotes_api_url, quotes_api_key):
+    """ Tweets a quote of the day status for the api app account. """
     try:
         logger.info("Tweeting quote of the day.")
         quote = get_random_quote(quotes_api_url, quotes_api_key)
         status = format_random_quote(quote)
-        api.update_status(status=status)
-    except:
+
+        tweet_max_lenght = 280
+        if len(status) < tweet_max_lenght:
+            api.update_status(status=status)
+
+        else:
+            logger.info("Tweet exceeds max length. Getting new quote.")
+            tweet_quote_of_the_day(api, quotes_api_url, quotes_api_key)
+
+    except Exception as e:
         logger.error("Error on quote of the day tweet", exc_info=True)
+        raise e
 
 
 def main():
@@ -43,10 +53,7 @@ def main():
     quotes_api_key = os.getenv("QUOTES_API_KEY")
     api = create_api()
 
-    while True:
-        tweet_quote_of_the_day(api, quotes_api_url, quotes_api_key)
-        logger.info("Waiting...")
-        time.sleep(60 * 60 * 12)
+    tweet_quote_of_the_day(api, quotes_api_url, quotes_api_key)
 
 
 if __name__ == "__main__":
