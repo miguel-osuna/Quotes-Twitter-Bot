@@ -1,1 +1,1 @@
-script: python3 src/quote_bot.py
+script: python3 src/cronjob.py

@@ -1,5 +1,4 @@
-import os
-import time
+from datetime import datetime
 import tweepy
 import logging
 import requests
@@ -30,7 +29,7 @@ def format_random_quote(quote):
 def tweet_quote_of_the_day(api, quotes_api_url, quotes_api_key):
     """ Tweets a quote of the day status for the api app account. """
     try:
-        logger.info("Tweeting quote of the day.")
+        logger.info("Tweeting quote of the day. Time is {}".format(datetime.now()))
         quote = get_random_quote(quotes_api_url, quotes_api_key)
         status = format_random_quote(quote)
 
@@ -45,15 +44,3 @@ def tweet_quote_of_the_day(api, quotes_api_url, quotes_api_key):
     except Exception as e:
         logger.error("Error on quote of the day tweet", exc_info=True)
         raise e
-
-
-def main():
-    quotes_api_url = os.getenv("QUOTES_API_URL")
-    quotes_api_key = os.getenv("QUOTES_API_KEY")
-    api = create_api()
-
-    tweet_quote_of_the_day(api, quotes_api_url, quotes_api_key)
-
-
-if __name__ == "__main__":
-    main()
