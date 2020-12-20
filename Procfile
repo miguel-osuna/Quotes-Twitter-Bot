@@ -1,0 +1,1 @@
+script: python3 src/quote_bot.py
