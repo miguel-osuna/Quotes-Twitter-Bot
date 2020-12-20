@@ -9,7 +9,7 @@ from api import create_api
 scheduler = BlockingScheduler()
 
 
-@scheduler.scheduled_job("interval", seconds=30)
+@scheduler.scheduled_job("cron", hour=12)
 def scheduled_qotd():
     quotes_api_url = os.getenv("QUOTES_API_URL")
     quotes_api_key = os.getenv("QUOTES_API_KEY")
