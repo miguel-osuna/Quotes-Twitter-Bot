@@ -3,7 +3,7 @@
 ## :book: Description
 Twitter bot for daily quotes
 
-### :darts: Features
+### :dart: Features
 - Tweet Scheduling
 
 ### :high_brightness: Visuals
